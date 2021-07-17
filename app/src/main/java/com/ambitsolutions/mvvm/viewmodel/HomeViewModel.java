@@ -1,15 +1,14 @@
 package com.ambitsolutions.mvvm.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-import com.ambitsolutions.mvvm.home.ProductModel;
+import com.ambitsolutions.mvvm.home.AdViewModel;
 import com.ambitsolutions.mvvm.repository.HomeRepository;
-
-import java.util.List;
 
 public class HomeViewModel extends AndroidViewModel {
     // AndroidViewModel is a subclass of ViewModel
@@ -17,18 +16,21 @@ public class HomeViewModel extends AndroidViewModel {
     // because is can cause a memory leak
 
     private HomeRepository repository;
-    private LiveData<List<ProductModel>> allProducts;
+    private MutableLiveData<AdViewModel> allProducts;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
         repository = new HomeRepository(application);
-        allProducts = repository.getAllProducts();// call the main function to get list of all items to show in home
+        allProducts = new MutableLiveData<>();
+        //  allProducts = repository.getAllProducts();// call the main function to get list of all items to show in home
     }
 
     //then make some public function that will call the other function in repository and pass the given data if any.
 
 
-    public LiveData<List<ProductModel>> getAllProducts() {
+    public MutableLiveData<AdViewModel> getAllProducts(String s) {
+        allProducts = repository.getAllProducts(s);
+        Log.i("VM", String.valueOf(allProducts));
         return allProducts;
     }
 }

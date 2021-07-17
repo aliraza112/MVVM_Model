@@ -23,25 +23,17 @@ public class RetrofitInstance {
         SharedPreferences read_preferences = context.getSharedPreferences("MySharedPref", Activity.MODE_PRIVATE);
 
         String token1 = read_preferences.getString("token", "");
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0aW1lU3RhbXAiOiIyMDIxLTAzLTE2IDA3OjIzOjA0In0.bFL-GrJD-u_Y5qv3GuRKCE8nwxj-m1m47Ga98pPfVBM";
+       // String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0aW1lU3RhbXAiOiIyMDIxLTAzLTE2IDA3OjIzOjA0In0.bFL-GrJD-u_Y5qv3GuRKCE8nwxj-m1m47Ga98pPfVBM";
 
-        String BASE_URL = "https://pakpoultryhub.com/DMS/restapi/"; // Base url part,
+        String BASE_URL = "http://uogsmartload.net/paklivestock/api/";
+
         // Base Url + Relative Url make complete api to get data
         // String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0aW1lU3RhbXAiOiIyMDIxLTAzLTE2IDA3OjIzOjA0In0.bFL-GrJD-u_Y5qv3GuRKCE8nwxj-m1m47Ga98pPfVBM";
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-                        Request request = chain.request();
-                        Request newrequest = request.newBuilder()
-                                .header("Authorization", token)
-                                .build();
-                        return chain.proceed(newrequest);
-                    }
-                }).retryOnConnectionFailure(true)
+              .retryOnConnectionFailure(true)
                 .addInterceptor(loggingInterceptor
                         .setLevel(HttpLoggingInterceptor.Level.BODY)).build();
 

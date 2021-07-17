@@ -1,15 +1,13 @@
 package com.ambitsolutions.mvvm.retrofit;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import com.ambitsolutions.mvvm.home.AdViewModel;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
 
 public interface WebApi {
     //https://pakpoultryhub.com/adminlte/restapi/Dboyorders/GetOrders
@@ -58,6 +56,10 @@ public interface WebApi {
     String sync_counter = "Synccounter/GetsyncData";
     String delete_order = "Order/deleteOrder";
 
+
+    @FormUrlEncoded
+    @POST("fetchbrajanwar.php")
+    Call<AdViewModel> fetchCowBuffaloBull(@FieldMap Map<String, String> fields);
 
 
     //to get specific data from json
